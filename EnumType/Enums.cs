@@ -1,6 +1,4 @@
-﻿
-
-namespace Assignment1.Heros
+﻿namespace Assignment1.EnumType
 {
     public enum Slot
     {
