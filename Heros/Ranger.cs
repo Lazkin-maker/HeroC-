@@ -11,26 +11,38 @@ namespace Assignment1.Heros
 {
     public class Ranger: Hero
     {
+        public List<WeaponType> RangerValidWeapons
+        {
+            get { return base.ValidWeaponTypes; }
+            set { base.ValidWeaponTypes = value; }
+        }
+
+        public List<ArmorType> RangerValidArmor
+        {
+            get { return base.ValidArmorTypes; }
+            set { base.ValidArmorTypes = new List<ArmorType> { ArmorType.Leather, ArmorType.Mail }; }
+        }
+
         public Dictionary<Slot, Item> Equipment
         {
             get { return base.equipment; }
             set { base.equipment = value; }
         }
 
-        public Ranger(HeroAttribute attribute) : base(attribute) { 
-            attribute.Strength = 1;
-            attribute.Dexterity= 7;
-            attribute.Intelligence= 1;
+        public Ranger(string name) : base(name) {
+            Attribute = new HeroAttribute(1, 7, 1);
+            RangerValidWeapons = new List<WeaponType>() { WeaponType.Bows };
+            RangerValidArmor = new List<ArmorType>() { ArmorType.Leather, ArmorType.Mail };
         }
 
 
         public override void EquipItem(Item item)
         {
-            base.EquipItem(item);
+           base.EquipItem(item);
            if(item is Weapon)
             {
                 Weapon weapon = (Weapon)item;
-                if(weapon.Type != Weapon.WeaponType.Bows) {
+                if(!RangerValidWeapons.Contains(weapon.Type)) {
                     throw new InvalidItemException($"{Name} cannot equip {item.Name} because it is not an availeble weapon!");
                 }
             }
@@ -38,13 +50,11 @@ namespace Assignment1.Heros
             {
                 Armor armor = (Armor)item;
                 base.EquipArmor(armor);
-                if (armor.Type != Armor.ArmorType.Leather && armor.Type != Armor.ArmorType.Mail)
+                if (!ValidArmorTypes.Contains(armor.Type))
                 {
                     throw new InvalidArmorException($"{Name} cannot equip {armor.Name} because it is not Leather type nor Mail!");
                 }
-              /*Attribute.Strength += armor.ArmoAttribute.Strength;
-                Attribute.Dexterity += armor.ArmoAttribute.Dexterity;
-                Attribute.Intelligence += armor.ArmoAttribute.Intelligence;*/
+
             }
         }
         public override int LevelUp()
@@ -54,6 +64,11 @@ namespace Assignment1.Heros
              Attribute.Dexterity = Attribute.Dexterity + 5;
              Attribute.Intelligence = Attribute.Intelligence + 1;
              return level;
+        }
+
+        public override void display()
+        {
+            base.display();
         }
     }
 }

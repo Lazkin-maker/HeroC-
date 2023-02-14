@@ -9,19 +9,19 @@ namespace Assignment1.Heros
         static void Main(string[] args)
         {
           
-            var att = new HeroAttribute(default, default, default);
-            var mage = new Mage(att);
+          
+            var mage = new Mage("MAGE NAME COOL"); // we should change the constructor to add name of Hero!!
             
 
             Console.WriteLine(mage.Attribute.Intelligence);
-            var range = new Ranger(att);
-            //Console.WriteLine(range.Attribute.Dexterity);
+            var range = new Ranger("RANGER NAME COOOOOL");
+          
 
-            var newWeapon = new Weapon("Common Axe", 1, Slot.Weapon,Weapon.WeaponType.Bows, 3);
+            var newWeapon = new Weapon("Common Axe", 1, Slot.Weapon,WeaponType.Bows, 3);
 
             Console.WriteLine(newWeapon.Slot);
 
-            var newArmor = new Armor("Common Plate Chest" , 1 , Slot.Body , Armor.ArmorType.Mail, new HeroAttribute(1, 3 , 1));
+            var newArmor = new Armor("Common Plate Chest" , 1 , Slot.Body , ArmorType.Leather, new HeroAttribute(1, 3 , 1));
 
             range.EquipItem(newWeapon);
 
@@ -41,18 +41,15 @@ namespace Assignment1.Heros
                 Console.WriteLine("Slot: " + entry.Key + ", Item: " + (entry.Value != null ? entry.Value.Name : "Empty"));
             }
 
-            Console.WriteLine("This is total Attribute : ");
-
-            Console.WriteLine(range.totalAttribute.Dexterity);
-
-
             Console.WriteLine("This is Hero's damage : ");
             Console.WriteLine(range.CalculateDamage());
 
-            //mage.LevelUp();
-           
-            /*Console.WriteLine(mage.Attribute.Strength);*/
+         
+            range.display();
 
+           /* range.LevelUp();
+
+            range.display();*/
         }
     }
 }

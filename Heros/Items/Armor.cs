@@ -20,13 +20,5 @@ namespace Assignment1.Heros.Items
             Type = type;
             ArmoAttribute = armoAttribute;
         }
-
-        public enum ArmorType
-        {
-            Cloth,
-            Leather,
-            Mail,
-            Plate
-        }
     }
 }

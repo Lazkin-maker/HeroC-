@@ -17,15 +17,11 @@ namespace Assignment1.Heros
         private Weapon equippedWeapon;
         protected string armor;
         protected List<Weapon> equipments = new List<Weapon>();
-        protected List<string> ValidWeaponTypes;
-        protected List<string> ValidArmorTypes;
+        protected List<WeaponType> ValidWeaponTypes;
+        protected List<ArmorType> ValidArmorTypes;
 
         public HeroAttribute Attribute { get; set; }
         public Weapon weapon { get; set; }
-        //public HeroAttribute totalAttribute { get; set; }
-
-
-
 
         public HeroAttribute totalAttribute { 
         get 
@@ -68,8 +64,9 @@ namespace Assignment1.Heros
         public string Name { get => name; set => name = value; } 
         public int Level { get => level; set => level = value; }
 
-        public Hero(HeroAttribute attribute) {
-            Attribute = attribute;
+
+        public Hero(string name) {
+            Name = name;
             equipment = new Dictionary<Slot, Item>
             {
                 {Slot.Head, null},
@@ -77,10 +74,6 @@ namespace Assignment1.Heros
                 {Slot.Legs, null},
                 {Slot.Weapon, null}
             };
-        }
-
-        public Hero(string name) {
-            this.name = name;
         }
 
 
@@ -117,12 +110,31 @@ namespace Assignment1.Heros
         }
 
        
-        public abstract int LevelUp();    
-        
-        public bool CanEquipItem(Item item)
+        public abstract int LevelUp();
+
+        public virtual void display()
         {
-            return Level >= item.RequiredLevel;
+            try
+            {
+                StringBuilder heroInfo = new StringBuilder();
+
+                heroInfo.AppendLine("Hero's Information : ");
+                heroInfo.AppendLine("The name of Hero :" + (this.name != null ? this.name : "Empty"));
+                heroInfo.AppendLine("The Class name of Hero : " + (this.GetType().Name != null ? this.GetType().Name : "Empty"));
+                heroInfo.AppendLine("Hero Level : " + (this.Level != null ? this.Level : "Empty"));
+                heroInfo.AppendLine("Total Strength : " + (this.totalAttribute.Strength != null ? this.totalAttribute.Strength : "Empty"));
+                heroInfo.AppendLine("Total Dexterity : " + (this.totalAttribute.Dexterity != null ? this.totalAttribute.Dexterity : "Empty"));
+                heroInfo.AppendLine("Total Intelligence : " + (this.totalAttribute.Intelligence != null ? this.totalAttribute.Intelligence : "Empty"));
+                heroInfo.AppendLine("Hero's Damage : " + (this.CalculateDamage() != null ? this.CalculateDamage() : "Empty"));
+
+                Console.WriteLine(heroInfo.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
-       
+
     }
 }

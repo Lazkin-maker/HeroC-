@@ -17,16 +17,5 @@ namespace Assignment1.Heros.Items
             Damage = damage;
             Type = type;
         }
-
-        public enum WeaponType
-        {
-            Axes,
-            Bows,
-            Daggers,
-            Hammers,
-            Staffs,
-            Swords,
-            Wand
-        }
     }
 }

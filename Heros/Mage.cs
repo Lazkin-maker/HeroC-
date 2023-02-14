@@ -12,19 +12,29 @@ namespace Assignment1.Heros
     public class Mage : Hero
     {
 
-       
+       public List<WeaponType> MageValidWeapons
+        {
+            get { return base.ValidWeaponTypes; }
+            set { base.ValidWeaponTypes = new List<WeaponType> { WeaponType.Staffs, WeaponType.Wand }; }
+        }
+
+        public List<ArmorType> MageValidArmor
+        {
+            get { return base.ValidArmorTypes; }
+            set { base.ValidArmorTypes = value; }   
+        }
+
         public Dictionary<Slot, Item> Equipment
         {
             get { return base.equipment; }
             set { base.equipment = value; }
         }
-        public Mage(HeroAttribute attribute) : base(attribute) { 
-            attribute.Strength = 1;
-            attribute.Dexterity = 1;
-            attribute.Intelligence = 8;
-        }
+        public Mage(string name) : base(name) {     
+            Attribute = new HeroAttribute(1, 1, 8);
 
-        
+            MageValidWeapons = new List<WeaponType> { WeaponType.Staffs, WeaponType.Wand };
+            ValidArmorTypes = new List<ArmorType> { ArmorType.Cloth };
+        }
 
         public override void EquipItem(Item item)
         {
@@ -34,7 +44,7 @@ namespace Assignment1.Heros
                 base.EquipItem(item);
                
                 Weapon weapon = (Weapon)item;
-                if(weapon.Type != Weapon.WeaponType.Staffs && weapon.Type != Weapon.WeaponType.Wand) {
+                if( !MageValidWeapons.Contains(weapon.Type)) {
                     throw new InvalidItemException($"{Name} cannot equip {item.Name} because it is not an availeble weapon!");
                 }
             }
@@ -43,15 +53,10 @@ namespace Assignment1.Heros
                 
                 Armor armor = (Armor)item;
                 base.EquipArmor(armor);
-                if (armor.Type != Armor.ArmorType.Cloth)
+                if (MageValidArmor.Contains(armor.Type))
                 {
                     throw new InvalidArmorException($"{Name} cannot equip {armor.Name} because it is not Cloth");
                 }
-/*                Attribute.Strength += armor.ArmoAttribute.Strength;
-                Attribute.Dexterity += armor.ArmoAttribute.Dexterity;
-                Attribute.Intelligence += armor.ArmoAttribute.Intelligence;*/
-
-
             }
         }
         public override int LevelUp()
@@ -61,6 +66,11 @@ namespace Assignment1.Heros
            Attribute.Dexterity = Attribute.Dexterity + 1;
            Attribute.Intelligence = Attribute.Intelligence + 5;
            return level;  
+        }
+
+        public override void display()
+        {
+            base.display();
         }
     }
 }
