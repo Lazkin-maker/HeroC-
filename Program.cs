@@ -1,4 +1,6 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using Assignment1.EnumType;
+using Assignment1.Heros.Items;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Assignment1.Heros
 {
@@ -19,11 +21,17 @@ namespace Assignment1.Heros
 
             Console.WriteLine(newWeapon.Slot);
 
-            var newArmor = new Armor("Common Plate Chest" , 1 , Slot.Body , Armor.ArmorType.Mail, new HeroAttribute(1, 0 , 0));
+            var newArmor = new Armor("Common Plate Chest" , 1 , Slot.Body , Armor.ArmorType.Mail, new HeroAttribute(1, 3 , 1));
 
             range.EquipItem(newWeapon);
+
+            Console.WriteLine("Before equip armor : ");
+            Console.WriteLine(range.totalAttribute.Dexterity);
             range.EquipItem(newArmor);
-         
+
+            Console.WriteLine("After equip armor : ");
+            Console.WriteLine(range.totalAttribute.Dexterity);
+
             //mage.EquipItem(newWeapon);
             //mage.EquipItem(newArmor);
 

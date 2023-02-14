@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Assignment1.EnumType;
+using Assignment1.Exceptions;
+using Assignment1.Heros.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +34,7 @@ namespace Assignment1.Heros
                 base.EquipItem(item);
                
                 Weapon weapon = (Weapon)item;
-                if(weapon.Type != Heros.Weapon.WeaponType.Staffs && weapon.Type != Heros.Weapon.WeaponType.Wand) {
+                if(weapon.Type != Weapon.WeaponType.Staffs && weapon.Type != Weapon.WeaponType.Wand) {
                     throw new InvalidItemException($"{Name} cannot equip {item.Name} because it is not an availeble weapon!");
                 }
             }
@@ -40,13 +43,13 @@ namespace Assignment1.Heros
                 
                 Armor armor = (Armor)item;
                 base.EquipArmor(armor);
-                if (armor.Type != Heros.Armor.ArmorType.Cloth)
+                if (armor.Type != Armor.ArmorType.Cloth)
                 {
                     throw new InvalidArmorException($"{Name} cannot equip {armor.Name} because it is not Cloth");
                 }
-                Attribute.Strength += armor.ArmoAttribute.Strength;
+/*                Attribute.Strength += armor.ArmoAttribute.Strength;
                 Attribute.Dexterity += armor.ArmoAttribute.Dexterity;
-                Attribute.Intelligence += armor.ArmoAttribute.Intelligence;
+                Attribute.Intelligence += armor.ArmoAttribute.Intelligence;*/
 
 
             }

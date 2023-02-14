@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment1.Heros
+namespace Assignment1.Exceptions
 {
     internal class InvalidItemException : Exception
     {
